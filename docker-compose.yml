@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  catalog-image:
+    image: multi-shop-order-api
+    container_name: order-api
+    ports:
+      - "7030:8080"
+      - "7031:8081"
+    networks:
+      - ms-sql-network
+      - multishop-order-network
+
+networks:
+  ms-sql-network:
+    external: true
+  multishop-order-network:
+    external: true
