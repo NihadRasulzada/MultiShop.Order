@@ -1,4 +1,5 @@
-﻿using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
+﻿using MediatR;
+using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
 using MultiShop.Order.Application.Features.CQRS.Results.AddressResults;
 using MultiShop.Order.Application.Interfaces;
 using MultiShop.Order.Domain.Entities;
@@ -18,11 +19,19 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
             Address address = await _repository.GetByIdAsync(query.Id);
             return new GetAddressByIdQueryResult
             {
-                AddressId = address.Id,
+                Id = address.Id,
                 UserId = address.UserId,
+                Name = address.Name,
+                Surname = address.Surname,
+                Email = address.Email,
+                Phone = address.Phone,
+                Country = address.Country,
                 District = address.District,
                 City = address.City,
-                Detail = address.Detail
+                Detail1 = address.Detail1,
+                Detail2 = address.Detail2,
+                Description = address.Description,
+                ZipCode = address.ZipCode
             };
         }
     }

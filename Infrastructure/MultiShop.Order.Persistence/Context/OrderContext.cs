@@ -7,7 +7,7 @@ namespace MultiShop.Order.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=f3a908d15e68,1433;Database=MultiShop.OrderDb;User=sa;Password=9138PaSsWoRdKsNs;Connect Timeout=60;Encrypt=false;");
+            optionsBuilder.UseSqlServer("Server=ASUS;Database=MultiShop.OrderDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
         }
 
         public DbSet<Address> Addresses { get; set; }

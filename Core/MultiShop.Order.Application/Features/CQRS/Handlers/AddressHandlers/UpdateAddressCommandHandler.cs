@@ -14,11 +14,19 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
 
         public async Task Handle(UpdateAddressCommand request)
         {
-            Address address = await _repository.GetByIdAsync(request.AddressId);
+            Address address = await _repository.GetByIdAsync(request.Id);
+            address.Name = request.Name;
+            address.Surname = request.Surname;
+            address.Email = request.Email;
+            address.Phone = request.Phone;
+            address.Country = request.Country;
             address.City = request.City;
             address.UserId = request.UserId;
-            address.Detail = request.Detail;
+            address.Detail1 = request.Detail1;
+            address.Detail2 = request.Detail2;
+            address.Description = request.Description;
             address.District = request.District;
+            address.ZipCode = request.ZipCode;
             await _repository.UpdateAsync(address);
         }
     }

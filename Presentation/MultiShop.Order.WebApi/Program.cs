@@ -8,12 +8,12 @@ using MultiShop.Order.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-//{
-//    opt.Authority = builder.Configuration["IdentityServerUrl"];
-//    opt.Audience = "ResourceDiscount";
-//    opt.RequireHttpsMetadata = false;
-//});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceOrder";
+    opt.RequireHttpsMetadata = false;
+});
 
 // Add services to the container.
 builder.Services.AddDbContext<OrderContext>();
