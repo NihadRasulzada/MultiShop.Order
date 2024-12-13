@@ -14,6 +14,7 @@ namespace MultiShop.Order.WebApi.Controllers
     {
         private readonly GetAddressQueryHandler _getAddressQueryHandler;
         private readonly GetAddressByIdQueryHandler _getAddressByIdQueryHandler;
+        private readonly GetAddressByUserIdQueryHandler _getAddressByUserIdCommandHandler;
         private readonly CreateAddressCommandHandler _createAddressCommandHandler;
         private readonly UpdateAddressCommandHandler _updateAddressCommandHandler;
         private readonly RemoveAddressCommandHandler _removeAddressCommandHandler;
@@ -22,13 +23,15 @@ namespace MultiShop.Order.WebApi.Controllers
             GetAddressByIdQueryHandler getAddressByIdQueryHandler,
             CreateAddressCommandHandler createAddressCommandHandler,
             UpdateAddressCommandHandler updateAddressCommandHandler,
-            RemoveAddressCommandHandler removeAddressCommandHandler)
+            RemoveAddressCommandHandler removeAddressCommandHandler,
+            GetAddressByUserIdQueryHandler getAddressByUserIdCommandHandler)
         {
             _getAddressQueryHandler = getAddressQueryHandler;
             _getAddressByIdQueryHandler = getAddressByIdQueryHandler;
             _createAddressCommandHandler = createAddressCommandHandler;
             _updateAddressCommandHandler = updateAddressCommandHandler;
             _removeAddressCommandHandler = removeAddressCommandHandler;
+            _getAddressByUserIdCommandHandler = getAddressByUserIdCommandHandler;
         }
 
         [HttpGet]
@@ -42,6 +45,18 @@ namespace MultiShop.Order.WebApi.Controllers
         public async Task<ActionResult> AddressListById(int id)
         {
             GetAddressByIdQueryResult result = await _getAddressByIdQueryHandler.Handle(new GetAddressByIdQuery(id));
+            return Ok(result);
+        }
+
+        [HttpGet("User/{id}")]
+        public async Task<ActionResult> AddressByUserId(string id)
+        {
+            GetAddressByUserIdQueryResult? result = await _getAddressByUserIdCommandHandler.Handle(new GetAddressByUserIdQuery(id));
+
+            if (result == null)
+            {
+                return Ok(null);
+            }
             return Ok(result);
         }
 

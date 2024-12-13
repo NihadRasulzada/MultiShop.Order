@@ -15,5 +15,6 @@
         public string Detail2 { get; set; }
         public string Description { get; set; }
         public string ZipCode { get; set; }
+        public Ordering Ordering { get; set; }
     }
 }

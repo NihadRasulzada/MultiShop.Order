@@ -80,7 +80,7 @@ namespace MultiShop.Order.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("MultiShop.Order.Domain.Entities.OrderDetail", b =>
@@ -115,7 +115,7 @@ namespace MultiShop.Order.Persistence.Migrations
 
                     b.HasIndex("OrderingId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("MultiShop.Order.Domain.Entities.Ordering", b =>
@@ -125,6 +125,9 @@ namespace MultiShop.Order.Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -138,7 +141,10 @@ namespace MultiShop.Order.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orderings");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
+
+                    b.ToTable("Orderings", (string)null);
                 });
 
             modelBuilder.Entity("MultiShop.Order.Domain.Entities.OrderDetail", b =>
@@ -150,6 +156,23 @@ namespace MultiShop.Order.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Ordering");
+                });
+
+            modelBuilder.Entity("MultiShop.Order.Domain.Entities.Ordering", b =>
+                {
+                    b.HasOne("MultiShop.Order.Domain.Entities.Address", "Address")
+                        .WithOne("Ordering")
+                        .HasForeignKey("MultiShop.Order.Domain.Entities.Ordering", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("MultiShop.Order.Domain.Entities.Address", b =>
+                {
+                    b.Navigation("Ordering")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MultiShop.Order.Domain.Entities.Ordering", b =>

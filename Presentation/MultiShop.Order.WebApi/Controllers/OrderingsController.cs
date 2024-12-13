@@ -51,5 +51,12 @@ namespace MultiShop.Order.WebApi.Controllers
             await _mediator.Send(new RemoveOrderingCommand(id));
             return Ok("Ordering Deleted");
         }
+
+        [HttpGet("GetOrderingByUserId/{id}")]
+        public async Task<IActionResult> GetOrderingByUserId(string id)
+        {
+            var values = await _mediator.Send(new GetOrderingByUserIdQuery(id));
+            return Ok(values);
+        }
     }
 }

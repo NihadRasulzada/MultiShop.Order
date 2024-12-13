@@ -19,10 +19,11 @@ namespace MultiShop.Order.Application.Features.Mediator.Handles.OrderingHandlers
             List<Ordering> orderings = await _repository.GetAllAsync();
             return orderings.Select(x => new GetOrderingQueryResult
             {
-                OrderingId = x.Id,
+                Id = x.Id,
                 OrderDate = x.OrderDate,
                 TotalPrice = x.TotalPrice,
                 UserId = x.UserId,
+                AddressId = x.AddressId
             }).ToList();
         }
     }

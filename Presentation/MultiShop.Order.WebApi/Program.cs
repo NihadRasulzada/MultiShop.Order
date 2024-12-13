@@ -19,11 +19,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddDbContext<OrderContext>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IOrderingRepository), typeof(OrderingRepository));
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddApplicationServices(builder.Configuration);
 
 #region CQRS
 builder.Services.AddScoped<GetAddressQueryHandler>();
 builder.Services.AddScoped<GetAddressByIdQueryHandler>();
+builder.Services.AddScoped<GetAddressByUserIdQueryHandler>();
 builder.Services.AddScoped<CreateAddressCommandHandler>();
 builder.Services.AddScoped<UpdateAddressCommandHandler>();
 builder.Services.AddScoped<RemoveAddressCommandHandler>();

@@ -7,5 +7,6 @@ namespace MultiShop.Order.Application.Features.Mediator.Commands.OrderingCommand
         public string UserId { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
+        public int AddressId { get; set; }
     }
 }

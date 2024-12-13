@@ -20,9 +20,10 @@ namespace MultiShop.Order.Application.Features.Mediator.Handles.OrderingHandlers
             return new GetOrderingByIdQueryResult
             {
                 OrderDate = ordering.OrderDate,
-                OrderingId = ordering.Id,
+                Id = ordering.Id,
                 TotalPrice = ordering.TotalPrice,
-                UserId = ordering.UserId
+                UserId = ordering.UserId,
+                AddressId = ordering.AddressId
             };
         }
     }
